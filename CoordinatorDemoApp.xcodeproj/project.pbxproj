@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		712D50BE2FA9F23A00188D0B /* AWUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 712D50BD2FA9F23A00188D0B /* AWUIKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		712D50A42FA9F0DA00188D0B /* CoordinatorDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoordinatorDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				712D50BE2FA9F23A00188D0B /* AWUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = CoordinatorDemoApp;
 			packageProductDependencies = (
+				712D50BD2FA9F23A00188D0B /* AWUIKit */,
 			);
 			productName = CoordinatorDemoApp;
 			productReference = 712D50A42FA9F0DA00188D0B /* CoordinatorDemoApp.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 712D509B2FA9F0DA00188D0B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				712D50BC2FA9F23A00188D0B /* XCRemoteSwiftPackageReference "AWUIKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 712D50A52FA9F0DA00188D0B /* Products */;
 			projectDirPath = "";
@@ -150,7 +159,6 @@
 				INFOPLIST_FILE = CoordinatorDemoApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -182,7 +190,6 @@
 				INFOPLIST_FILE = CoordinatorDemoApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -345,6 +352,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		712D50BC2FA9F23A00188D0B /* XCRemoteSwiftPackageReference "AWUIKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ArnaudWurmel/AWUIKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		712D50BD2FA9F23A00188D0B /* AWUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 712D50BC2FA9F23A00188D0B /* XCRemoteSwiftPackageReference "AWUIKit" */;
+			productName = AWUIKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 712D509C2FA9F0DA00188D0B /* Project object */;
 }
