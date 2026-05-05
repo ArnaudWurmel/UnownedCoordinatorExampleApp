@@ -8,7 +8,7 @@
 import SwiftUI
 
 protocol HomeNavigationDelegate: AnyObject {
-    // implement delegate methods
+    func home(didSelect city: City)
 }
 
 private let columns = [
@@ -23,7 +23,10 @@ struct HomeView: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 16) {
                 ForEach(cities) { city in
-                    CityTile(city: city)
+                    Button { navigationDelegate?.home(didSelect: city) } label: {
+                        CityTile(city: city)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             .padding(16)

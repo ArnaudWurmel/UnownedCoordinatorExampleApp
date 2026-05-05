@@ -25,5 +25,8 @@ class HomeCoordinator: AWCoordinator<UINavigationController> {
 }
 
 extension HomeCoordinator: HomeNavigationDelegate {
-    
+    func home(didSelect city: City) {
+        let detailsCoordinator = DetailsCoordinator(city: city, rootView: rootView)
+        detailsCoordinator.start()
+    }
 }

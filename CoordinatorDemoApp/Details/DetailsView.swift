@@ -18,21 +18,24 @@ struct DetailsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                AsyncImage(url: city.imageURL) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    case .empty:
-                        Color.secondary.overlay(ProgressView())
-                    default:
-                        Color.secondary
+                Color.secondary
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 280)
+                    .overlay {
+                        AsyncImage(url: city.imageURL) { phase in
+                            switch phase {
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            case .empty:
+                                ProgressView()
+                            default:
+                                EmptyView()
+                            }
+                        }
                     }
-                }
-                .frame(maxWidth: .infinity)
-                .frame(height: 280)
-                .clipped()
+                    .clipped()
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(city.name)
