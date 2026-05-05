@@ -15,18 +15,50 @@ private struct City: Identifiable {
     let id = UUID()
     let name: String
     let canton: String
-    let color: Color
+    let imageURL: URL
 }
 
 private let cities: [City] = [
-    City(name: "Geneva", canton: "GE", color: .blue),
-    City(name: "Lausanne", canton: "VD", color: .purple),
-    City(name: "Zurich", canton: "ZH", color: .indigo),
-    City(name: "Bern", canton: "BE", color: .orange),
-    City(name: "Basel", canton: "BS", color: .red),
-    City(name: "Lucerne", canton: "LU", color: .teal),
-    City(name: "St. Gallen", canton: "SG", color: .green),
-    City(name: "Lugano", canton: "TI", color: .yellow),
+    City(
+        name: "Geneva",
+        canton: "GE",
+        imageURL: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Geneve_2005_001_Ork.ch.jpg/1280px-Geneve_2005_001_Ork.ch.jpg")!
+    ),
+    City(
+        name: "Lausanne",
+        canton: "VD",
+        imageURL: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Lausanne_-_panoramio_%281%29.jpg/1280px-Lausanne_-_panoramio_%281%29.jpg")!
+    ),
+    City(
+        name: "Zurich",
+        canton: "ZH",
+        imageURL: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Altstadt_Z%C3%BCrich_2015.jpg/1280px-Altstadt_Z%C3%BCrich_2015.jpg")!
+    ),
+    City(
+        name: "Bern",
+        canton: "BE",
+        imageURL: URL(string: "https://upload.wikimedia.org/wikipedia/commons/4/45/Bundeshaus_Bern_2009%2C_Flooffy.jpg")!
+    ),
+    City(
+        name: "Basel",
+        canton: "BS",
+        imageURL: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Basel_-_M%C3%BCnsterpfalz1.jpg/1280px-Basel_-_M%C3%BCnsterpfalz1.jpg")!
+    ),
+    City(
+        name: "Lucerne",
+        canton: "LU",
+        imageURL: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/2009_08_24_06262_Lucerne.jpg/1280px-2009_08_24_06262_Lucerne.jpg")!
+    ),
+    City(
+        name: "St. Gallen",
+        canton: "SG",
+        imageURL: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/St.Gallen_vonDreiweieren_09.jpg/1280px-St.Gallen_vonDreiweieren_09.jpg")!
+    ),
+    City(
+        name: "Lugano",
+        canton: "TI",
+        imageURL: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Lago_di_Lugano_at_Sunset_%28cropped_2%29.jpg/1280px-Lago_di_Lugano_at_Sunset_%28cropped_2%29.jpg")!
+    ),
 ]
 
 private let columns = [
@@ -56,20 +88,37 @@ private struct CityTile: View {
 
     var body: some View {
         RoundedRectangle(cornerRadius: 16)
-            .fill(city.color.gradient)
+            .fill(Color.secondary.opacity(0.2))
             .frame(height: 120)
-            .overlay(
-                VStack(alignment: .leading, spacing: 4) {
+            .overlay {
+                AsyncImage(url: city.imageURL) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    case .empty:
+                        ProgressView()
+                    default:
+                        EmptyView()
+                    }
+                }
+                .overlay {
+                    Color.black
+                        .opacity(0.4)
+                }
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(alignment: .bottomLeading) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(city.name)
                         .font(.headline)
                         .foregroundStyle(.white)
-                    
                     Text(city.canton)
                         .font(.caption)
-                        .foregroundStyle(.white.opacity(0.8))
+                        .foregroundStyle(.white.opacity(0.85))
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                .padding(12)
-            )
+                .padding(10)
+            }
     }
 }
