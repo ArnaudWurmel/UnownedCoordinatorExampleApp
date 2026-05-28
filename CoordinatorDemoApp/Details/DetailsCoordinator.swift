@@ -9,7 +9,7 @@ import AWUIKit
 import SwiftUI
 import UIKit
 
-class DetailsCoordinator: AWCoordinator<UINavigationController> {
+class DetailsCoordinator: UnownedCoordinator<UINavigationController> {
     private let city: City
     private let eventStore = EventStore()
 
@@ -19,7 +19,7 @@ class DetailsCoordinator: AWCoordinator<UINavigationController> {
     }
 
     override func start() {
-        rootView.pushViewController(
+        rootView?.pushViewController(
             UIHostingController(
                 rootView: DetailsView(
                     navigationDelegate: self,
@@ -34,7 +34,7 @@ class DetailsCoordinator: AWCoordinator<UINavigationController> {
 
 extension DetailsCoordinator: DetailsNavigationDelegate {
     func details(didSelect event: Event) {
-        rootView.pushViewController(
+        rootView?.pushViewController(
             UIHostingController(
                 rootView: EventDetailsView(
                     navigationDelegate: self,
@@ -46,9 +46,13 @@ extension DetailsCoordinator: DetailsNavigationDelegate {
     }
 
     func detailsDidTapAddEvent() {
-        let addEventCoordinator = AddEventCoordinator(delegate: self)
-        start(childCoordinator: addEventCoordinator)
-        rootView.present(addEventCoordinator.rootView, animated: true)
+        let addEventNavigationController = UINavigationController()
+        let addEventCoordinator = AddEventCoordinator(
+            rootView: addEventNavigationController,
+            delegate: self
+        )
+        start(addEventCoordinator)
+        rootView?.present(addEventNavigationController, animated: true)
     }
 }
 
@@ -59,19 +63,14 @@ extension DetailsCoordinator: EventDetailsNavigationDelegate {
 extension DetailsCoordinator: AddEventCoordinatorNavigationDelegate {
     func addEventCoordinator(
         didSave event: Event,
-        coordinator: any AWAnyCoordinator
+        coordinator: AnyUnownedCoordinator
     ) {
         eventStore.add(event)
 
-        rootView.dismiss(animated: true) { [weak self] in
-            self?.remove(childCoordinator: coordinator)
-        }
-
+        rootView?.dismiss(animated: true)
     }
     
-    func addEventCoordinator(didPressCancel coordinator: any AWAnyCoordinator) {
-        rootView.dismiss(animated: true) { [weak self] in
-            self?.remove(childCoordinator: coordinator)
-        }
+    func addEventCoordinator(didPressCancel coordinator: AnyUnownedCoordinator) {
+        rootView?.dismiss(animated: true)
     }
 }

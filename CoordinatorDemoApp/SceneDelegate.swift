@@ -9,8 +9,6 @@ import AWUIKit
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    private let homeCoordinator: HomeCoordinator = .init(rootView: UINavigationController())
-
     var window: UIWindow?
 
 
@@ -22,9 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
+        let homeNavigationController = UINavigationController()
+        let homeCoordinator = HomeCoordinator(rootView: homeNavigationController)
+
+        
         homeCoordinator.start()
         
-        window?.rootViewController = homeCoordinator.rootView
+        window?.rootViewController = homeNavigationController
         
         window?.makeKeyAndVisible()
     }

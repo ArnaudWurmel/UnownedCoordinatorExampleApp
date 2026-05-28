@@ -12,23 +12,26 @@ import UIKit
 protocol AddEventCoordinatorNavigationDelegate: AnyObject {
     func addEventCoordinator(
         didSave event: Event,
-        coordinator: AWAnyCoordinator
+        coordinator: AnyUnownedCoordinator
     )
     func addEventCoordinator(
-        didPressCancel coordinator: AWAnyCoordinator
+        didPressCancel coordinator: AnyUnownedCoordinator
     )
 }
 
-class AddEventCoordinator: AWCoordinator<UINavigationController> {
+class AddEventCoordinator: UnownedCoordinator<UINavigationController> {
     weak var delegate: AddEventCoordinatorNavigationDelegate?
 
-    init(delegate: AddEventCoordinatorNavigationDelegate) {
+    init(
+        rootView: UINavigationController,
+        delegate: AddEventCoordinatorNavigationDelegate
+    ) {
         self.delegate = delegate
-        super.init(rootView: UINavigationController())
+        super.init(rootView: rootView)
     }
 
     override func start() {
-        rootView.setViewControllers(
+        rootView?.setViewControllers(
             [UIHostingController(rootView: AddEventView(navigationDelegate: self))],
             animated: false
         )

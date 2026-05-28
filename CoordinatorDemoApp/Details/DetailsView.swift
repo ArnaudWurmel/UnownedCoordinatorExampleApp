@@ -13,7 +13,7 @@ protocol DetailsNavigationDelegate: AnyObject {
 }
 
 struct DetailsView: View {
-    weak var navigationDelegate: DetailsNavigationDelegate?
+    let navigationDelegate: DetailsNavigationDelegate?
     let city: City
     let eventStore: EventStore
 

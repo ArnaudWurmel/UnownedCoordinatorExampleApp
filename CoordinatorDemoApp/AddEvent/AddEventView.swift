@@ -13,7 +13,7 @@ protocol AddEventNavigationDelegate: AnyObject {
 }
 
 struct AddEventView: View {
-    weak var navigationDelegate: AddEventNavigationDelegate?
+    let navigationDelegate: AddEventNavigationDelegate?
 
     @State private var title = ""
     @State private var subtitle = ""

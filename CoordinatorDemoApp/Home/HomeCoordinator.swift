@@ -9,13 +9,13 @@ import AWUIKit
 import SwiftUI
 import UIKit
 
-class HomeCoordinator: AWCoordinator<UINavigationController> {
+class HomeCoordinator: UnownedCoordinator<UINavigationController> {
     override func start() {
-        rootView.setViewControllers(
+        rootView?.setViewControllers(
             [
                 UIHostingController(
                     rootView: HomeView(
-                        navigationDelegate: self
+                      navigationDelegate: self
                     )
                 )
             ],
@@ -26,8 +26,11 @@ class HomeCoordinator: AWCoordinator<UINavigationController> {
 
 extension HomeCoordinator: HomeNavigationDelegate {
     func home(didSelect city: City) {
-        let detailsCoordinator = DetailsCoordinator(city: city, rootView: rootView)
-        
-        start(childCoordinator: detailsCoordinator)
+        guard let rootView else {
+            return
+        }
+        start(
+            DetailsCoordinator(city: city, rootView: rootView)
+        )
     }
 }

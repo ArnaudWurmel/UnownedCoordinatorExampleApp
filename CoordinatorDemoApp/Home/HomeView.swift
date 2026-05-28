@@ -17,13 +17,15 @@ private let columns = [
 ]
 
 struct HomeView: View {
-    weak var navigationDelegate: HomeNavigationDelegate?
+    let navigationDelegate: HomeNavigationDelegate
 
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 16) {
                 ForEach(cities) { city in
-                    Button { navigationDelegate?.home(didSelect: city) } label: {
+                    Button {
+                        navigationDelegate.home(didSelect: city)
+                    } label: {
                         CityTile(city: city)
                     }
                     .buttonStyle(.plain)

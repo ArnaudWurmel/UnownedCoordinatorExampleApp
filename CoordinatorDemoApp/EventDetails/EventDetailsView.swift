@@ -12,7 +12,7 @@ protocol EventDetailsNavigationDelegate: AnyObject {
 }
 
 struct EventDetailsView: View {
-    weak var navigationDelegate: EventDetailsNavigationDelegate?
+    let navigationDelegate: EventDetailsNavigationDelegate?
     let event: Event
 
     var body: some View {
